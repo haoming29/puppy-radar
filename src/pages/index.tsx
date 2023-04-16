@@ -4,11 +4,14 @@ import { useForm, Controller } from "react-hook-form";
 import { Flex, Heading, Text } from "@chakra-ui/layout";
 import { Box, Button, Image, Input, SimpleGrid } from "@chakra-ui/react";
 import { ErrorMessage } from "@hookform/error-message";
+import { shallow } from "zustand/shallow";
 
 import Navigation from "@/components/module/Navigation/Navigation";
 import styles from "@/styles/Home.module.css";
 import { loginUser } from "@/services/http";
-import { LoginUserData } from "@/types/api/user";
+import { LoginUserData } from "@/types/api/User";
+import { HOME_PAGE_TITLE, DEFAULT_SSO_DESCRIPTION } from "@/configs";
+import useStore from "@/store/useStore";
 
 interface LoginForm {
   firstName: string;
@@ -17,6 +20,14 @@ interface LoginForm {
 }
 
 export default function Home() {
+  const { authStatus, setAuthStatus } = useStore(
+    (state) => ({
+      authStatus: state.authStatus,
+      setAuthStatus: state.setAuthStatus,
+    }),
+    shallow
+  );
+
   const {
     control,
     handleSubmit,
@@ -34,9 +45,12 @@ export default function Home() {
       email: data.email,
     };
     try {
+      setAuthStatus(1); // start logging-in
       const result = await loginUser(apiData);
+      setAuthStatus(2);
       console.log(result);
     } catch (error) {
+      setAuthStatus(0);
       console.log(error);
     }
   };
@@ -48,11 +62,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Puppy Radar | Shelter Dogs Database</title>
-        <meta
-          name="description"
-          content="A demo shelter dogs database for heros to save them"
-        />
+        <title>{HOME_PAGE_TITLE}</title>
+        <meta name="description" content={DEFAULT_SSO_DESCRIPTION} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -173,6 +184,7 @@ export default function Home() {
                   minW={"30%"}
                   bg={"brand.dark.800"}
                   color={"white"}
+                  isLoading={authStatus === 1}
                   onClick={handleSubmit(onSubmit)}
                 >
                   Get Started

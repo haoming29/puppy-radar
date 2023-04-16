@@ -1,4 +1,4 @@
-import { LoginUserData } from "@/types/api/user";
+import { LoginUserData } from "@/types/api/User";
 import { LOGIN_USER } from "./api";
 import http from "./axios";
 

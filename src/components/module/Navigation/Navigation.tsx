@@ -1,10 +1,23 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text, Tooltip } from "@chakra-ui/react";
+import { shallow } from "zustand/shallow";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShieldDog } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import useStore from "@/store/useStore";
 
 function Navigation() {
+  const { authStatus } = useStore(
+    (state) => ({ authStatus: state.authStatus }),
+    shallow
+  );
+
   return (
-    <Box h={"60px"} backgroundColor="brand.light.900" pl={24} pr={24}>
+    <Flex
+      h={"60px"}
+      backgroundColor="brand.light.900"
+      pl={24}
+      pr={24}
+      justifyContent={"space-between"}
+    >
       <Flex alignItems={"center"}>
         <Image
           src="/puppy-radar-logo.svg"
@@ -13,7 +26,19 @@ function Navigation() {
           objectFit="cover"
         />
       </Flex>
-    </Box>
+      {authStatus >= 2 && (
+        <Flex alignItems={"center"}>
+          <Text fontSize="lg" mr={4}>
+            Logout
+          </Text>
+          <Tooltip hasArrow label="Dogs You Liked">
+            <Box fontSize="26px" h={"26px"} w={"26px"} cursor={"pointer"}>
+              <FontAwesomeIcon icon={faHeart} />
+            </Box>
+          </Tooltip>
+        </Flex>
+      )}
+    </Flex>
   );
 }
 
