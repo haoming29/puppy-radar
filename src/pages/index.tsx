@@ -3,10 +3,14 @@ import Head from "next/head";
 import { useForm, Controller } from "react-hook-form";
 import { Flex, Heading, Text } from "@chakra-ui/layout";
 import { Box, Button, Image, Input, SimpleGrid } from "@chakra-ui/react";
+import { ErrorMessage } from "@hookform/error-message";
+
 import Navigation from "@/components/module/Navigation/Navigation";
 import styles from "@/styles/Home.module.css";
+import { loginUser } from "@/services/http";
+import { LoginUserData } from "@/types/api/user";
 
-interface LoginData {
+interface LoginForm {
   firstName: string;
   lastName: string;
   email: string;
@@ -16,7 +20,6 @@ export default function Home() {
   const {
     control,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -25,7 +28,18 @@ export default function Home() {
       email: "",
     },
   });
-  const onSubmit = (data: LoginData) => console.log(data);
+  const onSubmit = async (data: LoginForm) => {
+    const apiData: LoginUserData = {
+      name: data.firstName + " " + data.lastName,
+      email: data.email,
+    };
+    try {
+      const result = await loginUser(apiData);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     console.log(errors);
@@ -35,7 +49,14 @@ export default function Home() {
     <>
       <Head>
         <title>Puppy Radar | Shelter Dogs Database</title>
+        <meta
+          name="description"
+          content="A demo shelter dogs database for heros to save them"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <Navigation />
       <main className={styles.main}>
         <Flex h={"100%"} alignItems={"flex-end"} justifyContent={"center"}>
@@ -78,7 +99,17 @@ export default function Home() {
                 <Controller
                   name="firstName"
                   control={control}
-                  rules={{ required: true }}
+                  rules={{
+                    required: {
+                      value: true,
+                      message: "First name is a required filed.",
+                    },
+                    pattern: {
+                      value: /^[a-zA-Z]+$/,
+                      message:
+                        "Your fisrt name may only contain alphabetic characters.",
+                    },
+                  }}
                   render={({ field }) => (
                     <Input
                       variant={"filled"}
@@ -92,7 +123,17 @@ export default function Home() {
                 <Controller
                   name="lastName"
                   control={control}
-                  rules={{ required: true }}
+                  rules={{
+                    required: {
+                      value: true,
+                      message: "Last name is a required filed.",
+                    },
+                    pattern: {
+                      value: /^[a-zA-Z]+$/,
+                      message:
+                        "Your last name may only contain alphabetic characters.",
+                    },
+                  }}
                   render={({ field }) => (
                     <Input
                       variant={"filled"}
@@ -107,7 +148,16 @@ export default function Home() {
                 <Controller
                   name="email"
                   control={control}
-                  rules={{ required: true }}
+                  rules={{
+                    required: {
+                      value: true,
+                      message: "Email is a required field.",
+                    },
+                    pattern: {
+                      value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                      message: "Please enter a valid email address.",
+                    },
+                  }}
                   render={({ field }) => (
                     <Input
                       variant={"filled"}
@@ -128,6 +178,25 @@ export default function Home() {
                   Get Started
                 </Button>
               </Flex>
+              {errors && (
+                <Box mt={4}>
+                  <ErrorMessage
+                    errors={errors}
+                    name="firstName"
+                    render={({ message }) => <Text>{message}</Text>}
+                  />
+                  <ErrorMessage
+                    errors={errors}
+                    name="lastName"
+                    render={({ message }) => <Text>{message}</Text>}
+                  />
+                  <ErrorMessage
+                    errors={errors}
+                    name="email"
+                    render={({ message }) => <Text>{message}</Text>}
+                  />
+                </Box>
+              )}
             </Box>
           </Flex>
         </Flex>
