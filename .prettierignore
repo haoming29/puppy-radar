@@ -1,0 +1,9 @@
+# Ignore artifacts:
+build
+node_modules
+.next
+public
+coverage
+next-env.d.ts
+package-lock.json
+next.config.js
