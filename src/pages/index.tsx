@@ -19,7 +19,7 @@ interface LoginForm {
   email: string;
 }
 
-export default function Home() {
+const Home = () => {
   const { authStatus, setAuthStatus } = useStore(
     (state) => ({
       authStatus: state.authStatus,
@@ -54,10 +54,6 @@ export default function Home() {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   return (
     <>
@@ -215,4 +211,6 @@ export default function Home() {
       </main>
     </>
   );
-}
+};
+
+export default Home;
