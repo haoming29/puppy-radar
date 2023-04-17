@@ -8,7 +8,8 @@ import { shallow } from "zustand/shallow";
 import Navigation from "@/components/module/Navigation/Navigation";
 import styles from "@/styles/Home.module.css";
 import { loginUser } from "@/services/http";
-import { LoginUserData } from "@/types/api/User";
+import { LoginUserRequest } from "@/types/api/User";
+import { useRouter } from "next/router";
 import { HOME_PAGE_TITLE, DEFAULT_SSO_DESCRIPTION } from "@/configs";
 import useStore from "@/store/useStore";
 
@@ -19,6 +20,7 @@ interface LoginForm {
 }
 
 const Home = () => {
+  const router = useRouter();
   const { authStatus, setAuthStatus } = useStore(
     (state) => ({
       authStatus: state.authStatus,
@@ -39,7 +41,7 @@ const Home = () => {
     },
   });
   const onSubmit = async (data: LoginForm) => {
-    const apiData: LoginUserData = {
+    const apiData: LoginUserRequest = {
       name: data.firstName + " " + data.lastName,
       email: data.email,
     };
@@ -47,6 +49,7 @@ const Home = () => {
       setAuthStatus(1); // start logging-in
       const result = await loginUser(apiData);
       setAuthStatus(2);
+      router.push({ pathname: "/search" });
       console.log(result);
     } catch (error) {
       setAuthStatus(0);

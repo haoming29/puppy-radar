@@ -9,6 +9,8 @@ if (process.env.NODE_ENV === "development") {
   http.defaults.baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 }
 
+http.defaults.withCredentials = true;
+
 http.interceptors.response.use(
   async (response) => {
     const { data } = response;

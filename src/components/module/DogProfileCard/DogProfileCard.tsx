@@ -47,6 +47,7 @@ const DogProfileCard = (props: DogProfileCardProps) => {
         h={"30px"}
         color={props.liked ? "#E83333" : "gray.300"}
         transition={"color 150ms ease-in-out"}
+        filter={"drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.4))"}
         zIndex={3}
         cursor={"pointer"}
         aria-label="Like this dog."

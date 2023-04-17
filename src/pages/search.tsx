@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Navigation from "@/components/module/Navigation/Navigation";
 import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
-import { DEFAULT_SSO_DESCRIPTION } from "@/configs";
+import { DEFAULT_PAGE_SIZE, DEFAULT_SSO_DESCRIPTION } from "@/configs";
 import { getTitle } from "@/utilities";
 import Head from "next/head";
 import styles from "@/styles/Search.module.css";
@@ -20,93 +20,90 @@ import {
   Text,
   Tooltip,
 } from "@chakra-ui/react";
-import { MultiSelect } from "react-multi-select-component";
+import { MultiSelect, Option } from "react-multi-select-component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import DogProfileCard from "@/components/module/DogProfileCard/DogProfileCard";
 import Pagination from "@/components/element/Pagination/Pagination";
+import { getDogsBreeds, getDogsDetail, searchDogs } from "@/services/http";
+import { SORTING, SearchDogResponse } from "@/types/api/Dog";
+import { Dog } from "@/types/general/Dog";
 
-const options = [
-  { label: "Grapes 🍇", value: "grapes" },
-  { label: "Mango 🥭", value: "mango" },
-  { label: "Strawberry 🍓", value: "strawberry", disabled: true },
-];
-
-const dogs = [
-  {
-    id: "Ababa8905009",
-    img: "https://picsum.photos/seed/picsum/220/300",
-    name: "Aabab Jkaodj",
-    age: 18,
-    zip_code: "53765",
-    breed: "string",
-  },
-  {
-    id: "Ababa120009",
-    img: "https://picsum.photos/seed/picsum/200/300",
-    name: "Aabab Jkaodj",
-    age: 18,
-    zip_code: "53765",
-    breed: "string",
-  },
-  {
-    id: "Ababa8210009",
-    img: "https://picsum.photos/seed/picsum/200/300",
-    name: "Aabab Jkaodj",
-    age: 18,
-    zip_code: "53765",
-    breed: "string",
-  },
-  {
-    id: "Ababa8910009",
-    img: "https://picsum.photos/seed/picsum/200/300",
-    name: "Aabab Jkaodj",
-    age: 18,
-    zip_code: "53765",
-    breed: "string",
-  },
-  {
-    id: "Ababa8900219",
-    img: "https://picsum.photos/seed/picsum/200/300",
-    name: "Aabab Jkaodj",
-    age: 18,
-    zip_code: "53765",
-    breed: "string",
-  },
-  {
-    id: "Ababa8900029",
-    img: "https://picsum.photos/seed/picsum/200/300",
-    name: "Aabab Jkaodj",
-    age: 18,
-    zip_code: "53765",
-    breed: "string",
-  },
-  {
-    id: "Ababa8930009",
-    img: "https://picsum.photos/seed/picsum/200/300",
-    name: "Aabab Jkaodj",
-    age: 18,
-    zip_code: "53765",
-    breed: "string",
-  },
-];
+const AGE_RANGE = [0, 20];
 
 const Search = () => {
   const emptyLike: Record<string, boolean> = {};
   const router = useRouter();
-
-  const AGE_RANGE = [0, 20];
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState<string[]>([]);
   const [displayRange, setDisplayRange] = useState(AGE_RANGE);
-  const [dataRange, setDataRange] = useState(AGE_RANGE);
   const [ascendingSort, setAscendingSort] = useState(true);
+  const [breedOptions, setBreedOptions] = useState<Option[]>([]);
+  const [dogsPage, setDogsPage] = useState<SearchDogResponse>();
+  const [dogsDetail, setDogsDetail] = useState<Dog[]>([]);
   const [likedDogs, setLikedDogs] = useState(emptyLike); // This one needs refactor to store
   const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
-    const page = router.query?.page;
+    if (!router.isReady || !router.query) return;
+    const { page, sort, breeds, ageMin, ageMax } = router.query;
+
+    if (breeds) {
+      if (typeof breeds === "string") {
+        setSelected([breeds]);
+      } else {
+        setSelected(breeds);
+      }
+    } else {
+      setSelected([]);
+    }
+
+    const sortQuery = sort ? `breed:${sort}` : "";
+    const searchAgeMin = ageMin ? Number(ageMin) : AGE_RANGE[0];
+    const searchAgeMax = ageMax ? Number(ageMax) : AGE_RANGE[1];
     page && setPageNumber(Number(page));
-  }, [router.query]);
+    const from: number = page ? DEFAULT_PAGE_SIZE * (Number(page) - 1) : 0;
+    sort && setAscendingSort(sort === SORTING.asc ? true : false);
+    setDisplayRange([searchAgeMin, searchAgeMax]);
+    searchDogs({
+      from,
+      sort: sortQuery,
+      ageMin: searchAgeMin,
+      ageMax: searchAgeMax,
+      breeds: breeds as string[],
+    }).then((dogs) => {
+      setDogsPage(dogs);
+    });
+  }, [router, router.isReady, router.query]);
+
+  useEffect(() => {
+    Promise.all([getDogsBreeds(), searchDogs({})])
+      .then((values) => {
+        const breeds = values[0];
+        const options: Option[] = breeds.map((item) => ({
+          label: item,
+          value: item,
+        }));
+
+        setBreedOptions(options);
+        setDogsPage(values[1]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (!dogsPage?.resultIds) {
+      return;
+    }
+    getDogsDetail(dogsPage.resultIds)
+      .then((dogs) => {
+        setDogsDetail(dogs);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [dogsPage]);
 
   return (
     <>
@@ -136,9 +133,22 @@ const Search = () => {
             <Text mr={2}>Breeds</Text>
             <MultiSelect
               className={styles.multiSelectBox}
-              options={options}
-              value={selected}
-              onChange={setSelected}
+              options={breedOptions}
+              value={selected.map((item) => ({ label: item, value: item }))}
+              onChange={(options: Option[]) => {
+                const oldeQuery = JSON.parse(JSON.stringify(router.query));
+                if (oldeQuery.breeds) {
+                  delete oldeQuery.breeds;
+                }
+                router.push({
+                  pathname: "/search",
+                  query: {
+                    ...oldeQuery,
+                    breeds: options.map((item) => item.value),
+                    page: 1,
+                  },
+                });
+              }}
               labelledBy="Select"
             />
           </Flex>
@@ -152,9 +162,13 @@ const Search = () => {
                 w={"18px"}
                 lineHeight={"18px"}
                 mr={2}
-                onClick={() =>
-                  !ascendingSort && setAscendingSort(!ascendingSort)
-                }
+                onClick={() => {
+                  if (ascendingSort) return;
+                  router.push({
+                    pathname: "/search",
+                    query: { ...router.query, sort: SORTING.asc, page: 1 },
+                  });
+                }}
               >
                 <FontAwesomeIcon
                   icon={faArrowUp}
@@ -168,9 +182,13 @@ const Search = () => {
               <Box
                 w={"18px"}
                 lineHeight={"18px"}
-                onClick={() =>
-                  ascendingSort && setAscendingSort(!ascendingSort)
-                }
+                onClick={() => {
+                  if (!ascendingSort) return;
+                  router.push({
+                    pathname: "/search",
+                    query: { ...router.query, sort: SORTING.desc, page: 1 },
+                  });
+                }}
               >
                 <FontAwesomeIcon
                   icon={faArrowDown}
@@ -184,14 +202,23 @@ const Search = () => {
           <Flex alignItems={"center"} w={"250px"} className={styles.inputItem}>
             <Text mr={4}>Age</Text>
             <RangeSlider
-              defaultValue={displayRange}
-              min={0}
-              max={20}
+              defaultValue={AGE_RANGE}
+              value={displayRange}
+              min={AGE_RANGE[0]}
+              max={AGE_RANGE[1]}
               step={1}
               onChange={(val) => setDisplayRange(val)}
               onChangeEnd={(val) => {
-                setDataRange(val);
                 setDisplayRange(val);
+                router.push({
+                  pathname: "/search",
+                  query: {
+                    ...router.query,
+                    ageMin: val[0] > AGE_RANGE[0] ? val[0] : AGE_RANGE[0],
+                    ageMax: val[1] < AGE_RANGE[1] ? val[1] : AGE_RANGE[1],
+                    page: 1,
+                  },
+                });
               }}
             >
               <RangeSliderTrack bg={"brand.dark.100"}>
@@ -219,35 +246,42 @@ const Search = () => {
           mt={"80px"}
           mb={"80px"}
         >
-          {dogs.map((item, idx) => (
-            <GridItem key={idx}>
-              <DogProfileCard
-                {...item}
-                liked={!!likedDogs[item.id]}
-                onToggleLike={() => {
-                  const newLikedDogs = { ...likedDogs };
-                  if (likedDogs[item.id]) {
-                    delete newLikedDogs[item.id];
-                  } else {
-                    newLikedDogs[item.id] = true;
-                  }
-                  setLikedDogs(newLikedDogs);
-                  console.log(newLikedDogs);
-                }}
-              />
-            </GridItem>
-          ))}
+          {dogsDetail.length &&
+            dogsDetail.map((item, idx) => (
+              <GridItem key={idx}>
+                <DogProfileCard
+                  {...item}
+                  liked={!!likedDogs[item.id]}
+                  onToggleLike={() => {
+                    const newLikedDogs = { ...likedDogs };
+                    if (likedDogs[item.id]) {
+                      delete newLikedDogs[item.id];
+                    } else {
+                      newLikedDogs[item.id] = true;
+                    }
+                    setLikedDogs(newLikedDogs);
+                    console.log(newLikedDogs);
+                  }}
+                />
+              </GridItem>
+            ))}
         </Grid>
-        <Pagination
-          curPage={pageNumber}
-          pageCount={100}
-          onPageChange={(page) => {
-            router.push({
-              pathname: "/search",
-              query: { page: page.selected + 1 },
-            });
-          }}
-        />
+        {dogsPage && dogsPage.total > DEFAULT_PAGE_SIZE && (
+          <Pagination
+            curPage={pageNumber}
+            pageCount={
+              dogsPage?.total
+                ? Math.ceil(dogsPage?.total / DEFAULT_PAGE_SIZE)
+                : 0
+            }
+            onPageChange={(page) => {
+              router.push({
+                pathname: "/search",
+                query: { ...router.query, page: page.selected + 1 },
+              });
+            }}
+          />
+        )}
       </main>
     </>
   );

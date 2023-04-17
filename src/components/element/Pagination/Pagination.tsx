@@ -16,7 +16,7 @@ const Pagination = (props: PaginationProps) => {
       nextLabel=">"
       onPageChange={props.onPageChange}
       pageRangeDisplayed={5}
-      pageCount={100}
+      pageCount={props.pageCount}
       previousLabel="<"
       renderOnZeroPageCount={null}
       pageClassName={styles.pageItem}
