@@ -1,17 +1,17 @@
+import React, { useEffect, useState } from "react";
+import { Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import Navigation from "@/components/module/Navigation/Navigation";
 import { DEFAULT_SSO_DESCRIPTION } from "@/configs";
 import { getTitle } from "@/utilities";
-import Head from "next/head";
-import React, { useEffect, useState } from "react";
-import styles from "@/styles/MatchResult.module.css";
-import { Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
-import useStore from "@/store/useStore";
 import { Dog } from "@/types/general/Dog";
-import { getDogsDetail, matchDog } from "@/services/http";
+import { getDogsDetail } from "@/services/http";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPaw } from "@fortawesome/free-solid-svg-icons";
 import { shallow } from "zustand/shallow";
+import useStore from "@/store/useStore";
+import Head from "next/head";
+import styles from "@/styles/MatchResult.module.css";
 
 const MatchResult = () => {
   const router = useRouter();

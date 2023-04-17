@@ -1,18 +1,17 @@
+import { useEffect } from "react";
 import Head from "next/head";
-import { useForm, Controller } from "react-hook-form";
-import { Flex, Heading, Text } from "@chakra-ui/layout";
 import { Box, Button, Image, Input, SimpleGrid } from "@chakra-ui/react";
+import { Controller, useForm } from "react-hook-form";
+import { Flex, Heading, Text } from "@chakra-ui/layout";
 import { ErrorMessage } from "@hookform/error-message";
 import { shallow } from "zustand/shallow";
-
-import Navigation from "@/components/module/Navigation/Navigation";
-import styles from "@/styles/Home.module.css";
+import { DEFAULT_SSO_DESCRIPTION, HOME_PAGE_TITLE } from "@/configs";
 import { loginUser } from "@/services/http";
 import { LoginUserRequest } from "@/types/api/User";
 import { useRouter } from "next/router";
-import { HOME_PAGE_TITLE, DEFAULT_SSO_DESCRIPTION } from "@/configs";
+import Navigation from "@/components/module/Navigation/Navigation";
+import styles from "@/styles/Home.module.css";
 import useStore from "@/store/useStore";
-import { useEffect } from "react";
 
 interface LoginForm {
   firstName: string;

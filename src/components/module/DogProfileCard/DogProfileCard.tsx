@@ -1,11 +1,11 @@
-import { Box, Flex, Image, Text, filter } from "@chakra-ui/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import {
+  faHeart,
   faLocationDot,
   faPaw,
-  faHeart,
 } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface DogProfileCardProps {
   id: string;

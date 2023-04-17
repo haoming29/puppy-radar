@@ -1,7 +1,7 @@
 import React from "react";
+import classNames from "classnames";
 import ReactPaginate from "react-paginate";
 import styles from "./Pagination.module.css";
-import classNames from "classnames";
 
 interface PaginationProps {
   curPage: number;

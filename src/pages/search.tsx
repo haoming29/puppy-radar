@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Navigation from "@/components/module/Navigation/Navigation";
-import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 import { DEFAULT_PAGE_SIZE, DEFAULT_SSO_DESCRIPTION } from "@/configs";
 import { getTitle } from "@/utilities";

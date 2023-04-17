@@ -1,15 +1,15 @@
-import Navigation from "@/components/module/Navigation/Navigation";
-import { DEFAULT_SSO_DESCRIPTION } from "@/configs";
-import { getTitle } from "@/utilities";
-import Head from "next/head";
 import React, { useEffect, useState } from "react";
-import styles from "@/styles/Match.module.css";
 import { Button, Flex, Grid, GridItem, Heading } from "@chakra-ui/react";
-import useStore from "@/store/useStore";
-import { Dog } from "@/types/general/Dog";
 import { getDogsDetail, matchDog } from "@/services/http";
-import DogProfileCard from "@/components/module/DogProfileCard/DogProfileCard";
+import { DEFAULT_SSO_DESCRIPTION } from "@/configs";
 import { useRouter } from "next/router";
+import { getTitle } from "@/utilities";
+import { Dog } from "@/types/general/Dog";
+import Head from "next/head";
+import styles from "@/styles/Match.module.css";
+import Navigation from "@/components/module/Navigation/Navigation";
+import useStore from "@/store/useStore";
+import DogProfileCard from "@/components/module/DogProfileCard/DogProfileCard";
 
 const Match = () => {
   const router = useRouter();

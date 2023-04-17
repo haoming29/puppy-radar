@@ -1,10 +1,10 @@
 import NextLink from "next/link";
-import { Box, Flex, Image, Text, Tooltip, Link } from "@chakra-ui/react";
+import { Box, Flex, Image, Link, Text, Tooltip } from "@chakra-ui/react";
 import { shallow } from "zustand/shallow";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import useStore from "@/store/useStore";
 import { useRouter } from "next/router";
+import useStore from "@/store/useStore";
 
 function Navigation() {
   const { authStatus, logout } = useStore(
