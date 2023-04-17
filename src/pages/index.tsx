@@ -12,6 +12,7 @@ import { LoginUserRequest } from "@/types/api/User";
 import { useRouter } from "next/router";
 import { HOME_PAGE_TITLE, DEFAULT_SSO_DESCRIPTION } from "@/configs";
 import useStore from "@/store/useStore";
+import { useEffect } from "react";
 
 interface LoginForm {
   firstName: string;
@@ -28,6 +29,12 @@ const Home = () => {
     }),
     shallow
   );
+
+  useEffect(() => {
+    if (authStatus === 2) {
+      router.push("/search");
+    }
+  }, [authStatus, router]);
 
   const {
     control,

@@ -1,0 +1,7 @@
+.main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: calc(100vh - 60px);
+  background: linear-gradient(180deg, #ffd54e 58.85%, #fdb600 100%);
+}

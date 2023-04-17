@@ -4,12 +4,14 @@ import { shallow } from "zustand/shallow";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import useStore from "@/store/useStore";
+import { useRouter } from "next/router";
 
 function Navigation() {
-  const { authStatus } = useStore(
-    (state) => ({ authStatus: state.authStatus }),
+  const { authStatus, logout } = useStore(
+    (state) => ({ authStatus: state.authStatus, logout: state.logout }),
     shallow
   );
+  const router = useRouter();
 
   return (
     <Flex
@@ -31,11 +33,25 @@ function Navigation() {
       </Flex>
       {authStatus >= 2 && (
         <Flex alignItems={"center"}>
-          <Text fontSize="lg" mr={4}>
+          <Text
+            cursor={"pointer"}
+            fontSize="lg"
+            mr={4}
+            onClick={() => {
+              logout();
+              router.push("/");
+            }}
+          >
             Logout
           </Text>
           <Tooltip hasArrow label="Dogs You Liked">
-            <Box fontSize="26px" h={"26px"} w={"26px"} cursor={"pointer"}>
+            <Box
+              fontSize="26px"
+              h={"26px"}
+              w={"26px"}
+              cursor={"pointer"}
+              onClick={() => router.push("/match")}
+            >
               <FontAwesomeIcon icon={faHeart} />
             </Box>
           </Tooltip>

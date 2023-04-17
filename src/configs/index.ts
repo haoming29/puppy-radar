@@ -5,3 +5,8 @@ export const DEFAULT_SSO_DESCRIPTION =
 export const TITLE_SPLITTER = "|";
 
 export const DEFAULT_PAGE_SIZE = 20;
+
+export const STORAGE_KEYS = {
+  LOGIN_STATUS: "PR_LOGIN_STATUS",
+  LIKED_LIST: "PR_LIKED_LIST",
+};

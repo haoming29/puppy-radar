@@ -22,4 +22,8 @@ export interface SearchDogResponse {
   prev: string;
 }
 
-export type DogsDetailRequest = [string];
+export type DogsDetailRequest = string[];
+
+export interface DogMatchResponse {
+  match: string;
+}
