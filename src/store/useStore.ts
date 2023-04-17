@@ -35,9 +35,11 @@ const useStore = create<StoreSlice>()((set, get) => ({
           set(() => ({ authStatus: 0 }));
           return;
         }
+        // If user logged in and the log-in time is greater than 1 hours
+        // than the cookie may be expired. Remove user's login status
         if (
           (value as LoginStatusStorage).status === 2 &&
-          (value as LoginStatusStorage).time - Date.now() > 1 * 60 * 60 * 1000
+          Date.now() - (value as LoginStatusStorage).time > 1 * 60 * 60 * 1000
         ) {
           set(() => ({ authStatus: 0 }));
           localforage.removeItem(STORAGE_KEYS.LOGIN_STATUS);
@@ -50,9 +52,14 @@ const useStore = create<StoreSlice>()((set, get) => ({
         set(() => ({ authStatus: 0 }));
       });
   },
-  logout: async () => {
+  logout: () => {
     set((state) => ({ authStatus: 0 }));
-    await localforage.removeItem(STORAGE_KEYS.LOGIN_STATUS);
+    localforage
+      .removeItem(STORAGE_KEYS.LOGIN_STATUS)
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
   },
   matchedDog: undefined,
   likedDogs: {},
