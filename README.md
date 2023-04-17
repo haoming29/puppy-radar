@@ -1,6 +1,14 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Puppy Radar: Fetch Rewards Frontend Take-home Assessment
 
 ## Getting Started
+
+### Prerequisite
+
+- Node Version: `>=v16.0`.
+- [npm](https://www.npmjs.com/) as package manager.
+- Set up `.env` file under the project root.
+  - In `.env` file, set key `NEXT_PUBLIC_API_BASE_URL` to the service URL of the backend.
+- Install all dependencies by running `npm install` under project root.
 
 First, run the development server:
 
