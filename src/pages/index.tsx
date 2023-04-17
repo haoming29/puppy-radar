@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Head from "next/head";
 import { useForm, Controller } from "react-hook-form";
 import { Flex, Heading, Text } from "@chakra-ui/layout";
@@ -178,7 +177,7 @@ const Home = () => {
                 />
                 <Button
                   minW={"30%"}
-                  bg={"brand.dark.800"}
+                  bg={"brand.dark.900"}
                   color={"white"}
                   isLoading={authStatus === 1}
                   onClick={handleSubmit(onSubmit)}

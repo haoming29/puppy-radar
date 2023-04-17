@@ -1,4 +1,5 @@
-import { Box, Flex, Image, Text, Tooltip } from "@chakra-ui/react";
+import NextLink from "next/link";
+import { Box, Flex, Image, Text, Tooltip, Link } from "@chakra-ui/react";
 import { shallow } from "zustand/shallow";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -19,12 +20,14 @@ function Navigation() {
       justifyContent={"space-between"}
     >
       <Flex alignItems={"center"}>
-        <Image
-          src="/puppy-radar-logo.svg"
-          alt="logo"
-          height={"56px"}
-          objectFit="cover"
-        />
+        <Link as={NextLink} href="/">
+          <Image
+            src="/puppy-radar-logo.svg"
+            alt="logo"
+            height={"56px"}
+            objectFit="cover"
+          />
+        </Link>
       </Flex>
       {authStatus >= 2 && (
         <Flex alignItems={"center"}>

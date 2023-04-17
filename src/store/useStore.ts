@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import UserSlice from "@/types/store/UserSlice";
 import DogSlice from "@/types/store/DogSlice";
 

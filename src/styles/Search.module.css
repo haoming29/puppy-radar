@@ -1,0 +1,30 @@
+.main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: calc(100vh - 60px);
+  background: linear-gradient(180deg, #ffd54e 58.85%, #fdb600 100%);
+}
+
+.multiSelectBox {
+  min-width: 200px;
+}
+
+.inputItem {
+  height: 100%;
+  padding: 0 1em;
+}
+
+.inputItem:not(:last-of-type) {
+  border-right: 1px solid lightgrey;
+}
+
+.arrow {
+  color: lightgrey;
+  cursor: pointer;
+}
+
+.activeArrow {
+  color: #300d38;
+  cursor: auto;
+}

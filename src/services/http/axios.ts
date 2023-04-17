@@ -19,6 +19,11 @@ http.interceptors.response.use(
       return Promise.reject(error);
     }
 
+    // Unauthorized request
+    if (error.response.status === 401) {
+      // invalidate auth key in local storage (and trigger redirect?)
+    }
+
     return Promise.reject(error);
   }
 );

@@ -13,13 +13,20 @@ const theme = extendTheme({
   colors: {
     brand: {
       dark: {
-        900: "#301237",
-        800: "#300D38",
-        700: "#FFD54E",
+        900: "#300D38",
+        800: "#5D176C",
+        700: "#7C2A8E",
+        600: "#9E38B6",
+        500: "#CF6CE5",
+        400: "#DF9AEF",
+        300: "#EEC2F9",
+        200: "#F8DDFE",
+        100: "#FCF1FF",
       },
       light: {
         900: "#FDB600",
-        100: "#FFF6DB",
+        200: "#FFF6DB",
+        100: "#FFFBF0",
       },
     },
   },

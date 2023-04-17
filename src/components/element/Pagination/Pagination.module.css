@@ -1,0 +1,34 @@
+.container {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  margin-bottom: 100px;
+  background-color: white;
+  border-radius: 6px;
+}
+
+.pageItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 100%;
+  padding: 0 20px;
+  font-size: 1.1em;
+  line-height: 1.1em;
+  list-style-type: none;
+  border-left: 1px solid rgb(241, 241, 241);
+  border-right: 1px solid rgb(241, 241, 241);
+}
+
+.prevNextItem {
+  width: 40px;
+  text-align: center;
+  list-style-type: none;
+}
+
+.activeItem {
+  color: white;
+  background-color: #300d38;
+}
