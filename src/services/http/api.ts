@@ -1,3 +1,7 @@
+/**
+ * This file contains all the API routes as constants
+ */
+
 export const LOGIN_USER = "/auth/login";
 
 export const LOGOUT_USER = "/auth/logout";

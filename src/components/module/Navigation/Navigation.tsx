@@ -6,7 +6,11 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
 import useStore from "@/store/useStore";
 
-function Navigation() {
+/**
+ * The Nagivation bar for the website
+ * @returns
+ */
+const Navigation = () => {
   const { authStatus, logout } = useStore(
     (state) => ({ authStatus: state.authStatus, logout: state.logout }),
     shallow
@@ -59,6 +63,6 @@ function Navigation() {
       )}
     </Flex>
   );
-}
+};
 
 export default Navigation;

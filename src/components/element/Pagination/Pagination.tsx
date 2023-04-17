@@ -9,6 +9,11 @@ interface PaginationProps {
   onPageChange: (page: Record<string, number>) => void;
 }
 
+/**
+ * A pagination component wrapped around react-paginate with custom styles added
+ * @param props
+ * @returns
+ */
 const Pagination = (props: PaginationProps) => {
   return (
     <ReactPaginate

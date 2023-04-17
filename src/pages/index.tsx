@@ -5,7 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Flex, Heading, Text } from "@chakra-ui/layout";
 import { ErrorMessage } from "@hookform/error-message";
 import { shallow } from "zustand/shallow";
-import { DEFAULT_SSO_DESCRIPTION, HOME_PAGE_TITLE } from "@/configs";
+import { DEFAULT_SEO_DESCRIPTION, HOME_PAGE_TITLE } from "@/configs";
 import { loginUser } from "@/services/http";
 import { LoginUserRequest } from "@/types/api/User";
 import { useRouter } from "next/router";
@@ -19,6 +19,10 @@ interface LoginForm {
   email: string;
 }
 
+/**
+ * The home page for the website
+ * @returns
+ */
 const Home = () => {
   const router = useRouter();
   const { authStatus, setAuthStatus } = useStore(
@@ -56,7 +60,6 @@ const Home = () => {
       const result = await loginUser(apiData);
       setAuthStatus(2);
       router.push({ pathname: "/search" });
-      console.log(result);
     } catch (error) {
       setAuthStatus(0);
       console.log(error);
@@ -67,7 +70,7 @@ const Home = () => {
     <>
       <Head>
         <title>{HOME_PAGE_TITLE}</title>
-        <meta name="description" content={DEFAULT_SSO_DESCRIPTION} />
+        <meta name="description" content={DEFAULT_SEO_DESCRIPTION} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

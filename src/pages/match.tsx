@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Flex, Grid, GridItem, Heading } from "@chakra-ui/react";
 import { getDogsDetail, matchDog } from "@/services/http";
-import { DEFAULT_SSO_DESCRIPTION } from "@/configs";
+import { DEFAULT_SEO_DESCRIPTION } from "@/configs";
 import { useRouter } from "next/router";
 import { getTitle } from "@/utilities";
 import { Dog } from "@/types/general/Dog";
@@ -11,6 +11,10 @@ import Navigation from "@/components/module/Navigation/Navigation";
 import useStore from "@/store/useStore";
 import DogProfileCard from "@/components/module/DogProfileCard/DogProfileCard";
 
+/**
+ * The match preview page to list all liked dogs a user has
+ * @returns
+ */
 const Match = () => {
   const router = useRouter();
 
@@ -45,7 +49,7 @@ const Match = () => {
     <>
       <Head>
         <title>{getTitle("Match")}</title>
-        <meta name="description" content={DEFAULT_SSO_DESCRIPTION} />
+        <meta name="description" content={DEFAULT_SEO_DESCRIPTION} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

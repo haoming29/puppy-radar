@@ -1,3 +1,6 @@
+/**
+ * This file sets up axios to call backend services
+ */
 import axios from "axios";
 
 const http = axios.create({
@@ -19,11 +22,6 @@ http.interceptors.response.use(
   async (error) => {
     if (!error.response) {
       return Promise.reject(error);
-    }
-
-    // Unauthorized request
-    if (error.response.status === 401) {
-      // invalidate auth key in local storage (and trigger redirect?)
     }
 
     return Promise.reject(error);

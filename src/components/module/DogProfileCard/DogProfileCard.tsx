@@ -18,6 +18,11 @@ interface DogProfileCardProps {
   onToggleLike: () => void;
 }
 
+/**
+ * The profile card to display detail information of each dog
+ * @param props
+ * @returns
+ */
 const DogProfileCard = (props: DogProfileCardProps) => {
   return (
     <Flex

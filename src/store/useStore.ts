@@ -1,8 +1,14 @@
-import { create } from "zustand";
-import UserSlice, { LoginStatusStorage } from "@/types/store/UserSlice";
-import DogSlice from "@/types/store/DogSlice";
+/**
+ * This file sets up a store for the front-end to share data
+ * across multiple pages like user login status
+ * and the liked dogs list
+ */
+
 import localforage from "localforage";
+import DogSlice from "@/types/store/DogSlice";
+import { create } from "zustand";
 import { STORAGE_KEYS } from "@/configs";
+import UserSlice, { LoginStatusStorage } from "@/types/store/UserSlice";
 
 export type StoreSlice = UserSlice & DogSlice;
 
