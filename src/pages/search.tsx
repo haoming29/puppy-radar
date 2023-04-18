@@ -3,7 +3,11 @@ import { useRouter } from "next/router";
 import Navigation from "@/components/module/Navigation/Navigation";
 import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
-import { DEFAULT_PAGE_SIZE, DEFAULT_SEO_DESCRIPTION } from "@/configs";
+import {
+  DEFAULT_PAGE_SIZE,
+  DEFAULT_SEO_DESCRIPTION,
+  LOGIN_PAGE,
+} from "@/configs";
 import { getTitle } from "@/utilities";
 import Head from "next/head";
 import styles from "@/styles/Search.module.css";
@@ -40,10 +44,11 @@ const AGE_RANGE = [0, 20];
  */
 const Search = () => {
   const router = useRouter();
-  const { likedDogs, setLikedDogs } = useStore(
+  const { likedDogs, setLikedDogs, logout } = useStore(
     (state) => ({
       likedDogs: state.likedDogs,
       setLikedDogs: state.setLikedDogs,
+      logout: state.logout,
     }),
     shallow
   );
@@ -82,10 +87,16 @@ const Search = () => {
       ageMin: searchAgeMin,
       ageMax: searchAgeMax,
       breeds: breeds as string[],
-    }).then((dogs) => {
-      setDogsPage(dogs);
-    });
-  }, [router, router.isReady, router.query]);
+    })
+      .then((dogs) => {
+        setDogsPage(dogs);
+      })
+      .catch((error) => {
+        if (error?.response.status === 401) {
+          logout().then(() => router.push(LOGIN_PAGE));
+        }
+      });
+  }, [logout, router, router.query]);
 
   useEffect(() => {
     Promise.all([getDogsBreeds(), searchDogs({})])
@@ -100,9 +111,11 @@ const Search = () => {
         setDogsPage(values[1]);
       })
       .catch((error) => {
-        console.log(error);
+        if (error?.response.status === 401) {
+          logout().then(() => router.push(LOGIN_PAGE));
+        }
       });
-  }, []);
+  }, [logout, router]);
 
   useEffect(() => {
     if (!dogsPage?.resultIds) {

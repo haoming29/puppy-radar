@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Flex, Grid, GridItem, Heading } from "@chakra-ui/react";
 import { getDogsDetail, matchDog } from "@/services/http";
-import { DEFAULT_SEO_DESCRIPTION } from "@/configs";
+import { DEFAULT_SEO_DESCRIPTION, LOGIN_PAGE } from "@/configs";
 import { useRouter } from "next/router";
 import { getTitle } from "@/utilities";
 import { Dog } from "@/types/general/Dog";
@@ -20,8 +20,11 @@ const Match = () => {
 
   const [likedDogsDetail, setLikedDogsDetail] = useState<Dog[]>([]);
   const [isMatching, setIsMatching] = useState(false);
-  const likedDogs = useStore((state) => state.likedDogs);
-  const setLikedDogs = useStore((state) => state.setLikedDogs);
+  const { likedDogs, setLikedDogs, logout } = useStore((state) => ({
+    likedDogs: state.likedDogs,
+    setLikedDogs: state.setLikedDogs,
+    logout: state.logout,
+  }));
 
   useEffect(() => {
     if (!likedDogs) return;
@@ -31,8 +34,11 @@ const Match = () => {
       })
       .catch((error) => {
         console.log(error);
+        if (error?.response.status === 401) {
+          logout().then(() => router.push(LOGIN_PAGE));
+        }
       });
-  }, [likedDogs]);
+  }, [likedDogs, logout, router]);
 
   const onMatch = async () => {
     setIsMatching(true);

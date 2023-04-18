@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import Navigation from "@/components/module/Navigation/Navigation";
-import { DEFAULT_SEO_DESCRIPTION } from "@/configs";
+import { DEFAULT_SEO_DESCRIPTION, LOGIN_PAGE } from "@/configs";
 import { getTitle } from "@/utilities";
 import { Dog } from "@/types/general/Dog";
 import { getDogsDetail } from "@/services/http";
@@ -21,9 +21,10 @@ const MatchResult = () => {
   const router = useRouter();
 
   const [matchedDogDetail, setMatchedDogDetail] = useState<Dog | undefined>();
-  const { clearLikedDogs } = useStore(
+  const { clearLikedDogs, logout } = useStore(
     (state) => ({
       clearLikedDogs: state.clearLikedDogs,
+      logout: state.logout,
     }),
     shallow
   );
@@ -39,8 +40,11 @@ const MatchResult = () => {
       })
       .catch((error) => {
         console.log(error);
+        if (error?.response.status === 401) {
+          logout().then(() => router.push(LOGIN_PAGE));
+        }
       });
-  }, [router, router.query]);
+  }, [logout, router, router.query]);
 
   return (
     <>

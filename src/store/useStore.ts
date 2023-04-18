@@ -52,14 +52,9 @@ const useStore = create<StoreSlice>()((set, get) => ({
         set(() => ({ authStatus: 0 }));
       });
   },
-  logout: () => {
+  logout: async () => {
     set((state) => ({ authStatus: 0 }));
-    localforage
-      .removeItem(STORAGE_KEYS.LOGIN_STATUS)
-      .then(() => {})
-      .catch((error) => {
-        console.log(error);
-      });
+    return localforage.removeItem(STORAGE_KEYS.LOGIN_STATUS);
   },
   matchedDog: undefined,
   likedDogs: {},
