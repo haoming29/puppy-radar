@@ -17,3 +17,8 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## If you are curious
+
+- [This](https://www.figma.com/file/BgglezVAZ0KCFjpi2axwtH/Puppy-Radar?t=JUhMqcxdbxHcaZ5s-1) is the Figma file I made for the UI/UX design of the website.
+- The website added as many aria-label or related aria attributes as possible to be accessible to screen reader, but I may miss some due to the quick turnover.
