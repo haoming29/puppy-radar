@@ -11,29 +11,27 @@ exports[`Pagination renders correctly 1`] = `
         role="navigation"
       >
         <li
-          class="prevNextItem disabled"
+          class="prevNextItem"
         >
           <a
-            aria-disabled="true"
+            aria-disabled="false"
             aria-label="Previous page"
-            class=" "
+            class=""
             rel="prev"
             role="button"
-            tabindex="-1"
+            tabindex="0"
           >
             &lt;
           </a>
         </li>
         <li
-          class="pageItem activeItem"
+          class="pageItem"
         >
           <a
-            aria-current="page"
-            aria-label="Page 1 is your current page"
+            aria-label="Page 1"
             class="pageLink"
-            rel="canonical"
             role="button"
-            tabindex="-1"
+            tabindex="0"
           >
             1
           </a>
@@ -44,7 +42,6 @@ exports[`Pagination renders correctly 1`] = `
           <a
             aria-label="Page 2"
             class="pageLink"
-            rel="next"
             role="button"
             tabindex="0"
           >
@@ -67,24 +64,75 @@ exports[`Pagination renders correctly 1`] = `
           class="pageItem"
         >
           <a
-            aria-label="Page 4"
-            class="pageLink"
+            aria-label="Jump backward"
             role="button"
             tabindex="0"
           >
-            4
+            ...
           </a>
         </li>
         <li
           class="pageItem"
         >
           <a
-            aria-label="Page 5"
+            aria-label="Page 9"
             class="pageLink"
             role="button"
             tabindex="0"
           >
-            5
+            9
+          </a>
+        </li>
+        <li
+          class="pageItem"
+        >
+          <a
+            aria-label="Page 10"
+            class="pageLink"
+            rel="prev"
+            role="button"
+            tabindex="0"
+          >
+            10
+          </a>
+        </li>
+        <li
+          class="pageItem activeItem"
+        >
+          <a
+            aria-current="page"
+            aria-label="Page 11 is your current page"
+            class="pageLink"
+            rel="canonical"
+            role="button"
+            tabindex="-1"
+          >
+            11
+          </a>
+        </li>
+        <li
+          class="pageItem"
+        >
+          <a
+            aria-label="Page 12"
+            class="pageLink"
+            rel="next"
+            role="button"
+            tabindex="0"
+          >
+            12
+          </a>
+        </li>
+        <li
+          class="pageItem"
+        >
+          <a
+            aria-label="Page 13"
+            class="pageLink"
+            role="button"
+            tabindex="0"
+          >
+            13
           </a>
         </li>
         <li
@@ -158,29 +206,27 @@ exports[`Pagination renders correctly 1`] = `
       role="navigation"
     >
       <li
-        class="prevNextItem disabled"
+        class="prevNextItem"
       >
         <a
-          aria-disabled="true"
+          aria-disabled="false"
           aria-label="Previous page"
-          class=" "
+          class=""
           rel="prev"
           role="button"
-          tabindex="-1"
+          tabindex="0"
         >
           &lt;
         </a>
       </li>
       <li
-        class="pageItem activeItem"
+        class="pageItem"
       >
         <a
-          aria-current="page"
-          aria-label="Page 1 is your current page"
+          aria-label="Page 1"
           class="pageLink"
-          rel="canonical"
           role="button"
-          tabindex="-1"
+          tabindex="0"
         >
           1
         </a>
@@ -191,7 +237,6 @@ exports[`Pagination renders correctly 1`] = `
         <a
           aria-label="Page 2"
           class="pageLink"
-          rel="next"
           role="button"
           tabindex="0"
         >
@@ -214,24 +259,75 @@ exports[`Pagination renders correctly 1`] = `
         class="pageItem"
       >
         <a
-          aria-label="Page 4"
-          class="pageLink"
+          aria-label="Jump backward"
           role="button"
           tabindex="0"
         >
-          4
+          ...
         </a>
       </li>
       <li
         class="pageItem"
       >
         <a
-          aria-label="Page 5"
+          aria-label="Page 9"
           class="pageLink"
           role="button"
           tabindex="0"
         >
-          5
+          9
+        </a>
+      </li>
+      <li
+        class="pageItem"
+      >
+        <a
+          aria-label="Page 10"
+          class="pageLink"
+          rel="prev"
+          role="button"
+          tabindex="0"
+        >
+          10
+        </a>
+      </li>
+      <li
+        class="pageItem activeItem"
+      >
+        <a
+          aria-current="page"
+          aria-label="Page 11 is your current page"
+          class="pageLink"
+          rel="canonical"
+          role="button"
+          tabindex="-1"
+        >
+          11
+        </a>
+      </li>
+      <li
+        class="pageItem"
+      >
+        <a
+          aria-label="Page 12"
+          class="pageLink"
+          rel="next"
+          role="button"
+          tabindex="0"
+        >
+          12
+        </a>
+      </li>
+      <li
+        class="pageItem"
+      >
+        <a
+          aria-label="Page 13"
+          class="pageLink"
+          role="button"
+          tabindex="0"
+        >
+          13
         </a>
       </li>
       <li

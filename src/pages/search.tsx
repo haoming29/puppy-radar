@@ -63,7 +63,6 @@ const Search = () => {
   const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
-    if (!router.isReady || !router.query) return;
     const { page, sort, breeds, ageMin, ageMax } = router.query;
 
     if (breeds) {
@@ -76,32 +75,29 @@ const Search = () => {
       setSelected([]);
     }
 
+    let from = 0;
+    if (page !== undefined) {
+      setPageNumber(Number(page) - 1);
+      from = DEFAULT_PAGE_SIZE * (Number(page) - 1);
+    }
+
     const sortQuery = sort ? `breed:${sort}` : "";
     const searchAgeMin = ageMin ? Number(ageMin) : AGE_RANGE[0];
     const searchAgeMax = ageMax ? Number(ageMax) : AGE_RANGE[1];
-    page && setPageNumber(Number(page));
-    const from: number = page ? DEFAULT_PAGE_SIZE * (Number(page) - 1) : 0;
+
     sort && setAscendingSort(sort === SORTING.asc ? true : false);
     setDisplayRange([searchAgeMin, searchAgeMax]);
-    searchDogs({
-      from,
-      sort: sortQuery,
-      ageMin: searchAgeMin,
-      ageMax: searchAgeMax,
-      breeds: breeds as string[],
-    })
-      .then((dogs) => {
-        setDogsPage(dogs);
-      })
-      .catch((error) => {
-        if (error?.response.status === 401) {
-          logout().then(() => router.push(LOGIN_PAGE));
-        }
-      });
-  }, [logout, router, router.query]);
 
-  useEffect(() => {
-    Promise.all([getDogsBreeds(), searchDogs({})])
+    Promise.all([
+      getDogsBreeds(),
+      searchDogs({
+        from,
+        sort: sortQuery,
+        ageMin: searchAgeMin,
+        ageMax: searchAgeMax,
+        breeds: breeds as string[],
+      }),
+    ])
       .then((values) => {
         const breeds = values[0];
         const options: Option[] = breeds.map((item) => ({
@@ -111,13 +107,14 @@ const Search = () => {
 
         setBreedOptions(options);
         setDogsPage(values[1]);
+        return;
       })
       .catch((error) => {
         if (error?.response.status === 401) {
           logout().then(() => router.push(LOGIN_PAGE));
         }
       });
-  }, [logout, router]);
+  }, [logout, router, router.query]);
 
   useEffect(() => {
     if (!dogsPage?.resultIds) {
@@ -325,6 +322,7 @@ const Search = () => {
         </Grid>
         {dogsPage && dogsPage.total > DEFAULT_PAGE_SIZE && (
           <Pagination
+            curPage={pageNumber}
             pageCount={
               dogsPage?.total
                 ? Math.ceil(dogsPage?.total / DEFAULT_PAGE_SIZE)
