@@ -1,4 +1,4 @@
-# Puppy Radar: Fetch Rewards Frontend Take-home Assessment
+# 🐕 Puppy Radar: Fetch Rewards Frontend Take-home Assessment
 
 ## Getting Started
 
@@ -17,6 +17,14 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Testing
+
+Run testing suite
+
+```bash
+npm run test
+```
 
 ## If you are curious
 
