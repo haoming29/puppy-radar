@@ -1,0 +1,352 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination renders correctly 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <ul
+        aria-label="Pagination"
+        class="container"
+        role="navigation"
+      >
+        <li
+          class="prevNextItem disabled"
+        >
+          <a
+            aria-disabled="true"
+            aria-label="Previous page"
+            class=" "
+            rel="prev"
+            role="button"
+            tabindex="-1"
+          >
+            &lt;
+          </a>
+        </li>
+        <li
+          class="pageItem activeItem"
+        >
+          <a
+            aria-current="page"
+            aria-label="Page 1 is your current page"
+            class="pageLink"
+            rel="canonical"
+            role="button"
+            tabindex="-1"
+          >
+            1
+          </a>
+        </li>
+        <li
+          class="pageItem"
+        >
+          <a
+            aria-label="Page 2"
+            class="pageLink"
+            rel="next"
+            role="button"
+            tabindex="0"
+          >
+            2
+          </a>
+        </li>
+        <li
+          class="pageItem"
+        >
+          <a
+            aria-label="Page 3"
+            class="pageLink"
+            role="button"
+            tabindex="0"
+          >
+            3
+          </a>
+        </li>
+        <li
+          class="pageItem"
+        >
+          <a
+            aria-label="Page 4"
+            class="pageLink"
+            role="button"
+            tabindex="0"
+          >
+            4
+          </a>
+        </li>
+        <li
+          class="pageItem"
+        >
+          <a
+            aria-label="Page 5"
+            class="pageLink"
+            role="button"
+            tabindex="0"
+          >
+            5
+          </a>
+        </li>
+        <li
+          class="pageItem"
+        >
+          <a
+            aria-label="Jump forward"
+            role="button"
+            tabindex="0"
+          >
+            ...
+          </a>
+        </li>
+        <li
+          class="pageItem"
+        >
+          <a
+            aria-label="Page 98"
+            class="pageLink"
+            role="button"
+            tabindex="0"
+          >
+            98
+          </a>
+        </li>
+        <li
+          class="pageItem"
+        >
+          <a
+            aria-label="Page 99"
+            class="pageLink"
+            role="button"
+            tabindex="0"
+          >
+            99
+          </a>
+        </li>
+        <li
+          class="pageItem"
+        >
+          <a
+            aria-label="Page 100"
+            class="pageLink"
+            role="button"
+            tabindex="0"
+          >
+            100
+          </a>
+        </li>
+        <li
+          class="prevNextItem"
+        >
+          <a
+            aria-disabled="false"
+            aria-label="Next page"
+            class=""
+            rel="next"
+            role="button"
+            tabindex="0"
+          >
+            &gt;
+          </a>
+        </li>
+      </ul>
+    </div>
+  </body>,
+  "container": <div>
+    <ul
+      aria-label="Pagination"
+      class="container"
+      role="navigation"
+    >
+      <li
+        class="prevNextItem disabled"
+      >
+        <a
+          aria-disabled="true"
+          aria-label="Previous page"
+          class=" "
+          rel="prev"
+          role="button"
+          tabindex="-1"
+        >
+          &lt;
+        </a>
+      </li>
+      <li
+        class="pageItem activeItem"
+      >
+        <a
+          aria-current="page"
+          aria-label="Page 1 is your current page"
+          class="pageLink"
+          rel="canonical"
+          role="button"
+          tabindex="-1"
+        >
+          1
+        </a>
+      </li>
+      <li
+        class="pageItem"
+      >
+        <a
+          aria-label="Page 2"
+          class="pageLink"
+          rel="next"
+          role="button"
+          tabindex="0"
+        >
+          2
+        </a>
+      </li>
+      <li
+        class="pageItem"
+      >
+        <a
+          aria-label="Page 3"
+          class="pageLink"
+          role="button"
+          tabindex="0"
+        >
+          3
+        </a>
+      </li>
+      <li
+        class="pageItem"
+      >
+        <a
+          aria-label="Page 4"
+          class="pageLink"
+          role="button"
+          tabindex="0"
+        >
+          4
+        </a>
+      </li>
+      <li
+        class="pageItem"
+      >
+        <a
+          aria-label="Page 5"
+          class="pageLink"
+          role="button"
+          tabindex="0"
+        >
+          5
+        </a>
+      </li>
+      <li
+        class="pageItem"
+      >
+        <a
+          aria-label="Jump forward"
+          role="button"
+          tabindex="0"
+        >
+          ...
+        </a>
+      </li>
+      <li
+        class="pageItem"
+      >
+        <a
+          aria-label="Page 98"
+          class="pageLink"
+          role="button"
+          tabindex="0"
+        >
+          98
+        </a>
+      </li>
+      <li
+        class="pageItem"
+      >
+        <a
+          aria-label="Page 99"
+          class="pageLink"
+          role="button"
+          tabindex="0"
+        >
+          99
+        </a>
+      </li>
+      <li
+        class="pageItem"
+      >
+        <a
+          aria-label="Page 100"
+          class="pageLink"
+          role="button"
+          tabindex="0"
+        >
+          100
+        </a>
+      </li>
+      <li
+        class="prevNextItem"
+      >
+        <a
+          aria-disabled="false"
+          aria-label="Next page"
+          class=""
+          rel="next"
+          role="button"
+          tabindex="0"
+        >
+          &gt;
+        </a>
+      </li>
+    </ul>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

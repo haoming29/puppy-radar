@@ -22,7 +22,6 @@ import {
   RangeSliderFilledTrack,
   RangeSliderThumb,
   RangeSliderTrack,
-  Text,
   Tooltip,
 } from "@chakra-ui/react";
 import { MultiSelect, Option } from "react-multi-select-component";
@@ -326,7 +325,6 @@ const Search = () => {
         </Grid>
         {dogsPage && dogsPage.total > DEFAULT_PAGE_SIZE && (
           <Pagination
-            curPage={pageNumber}
             pageCount={
               dogsPage?.total
                 ? Math.ceil(dogsPage?.total / DEFAULT_PAGE_SIZE)

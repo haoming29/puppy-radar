@@ -4,7 +4,6 @@ import ReactPaginate from "react-paginate";
 import styles from "./Pagination.module.css";
 
 interface PaginationProps {
-  curPage: number;
   pageCount: number;
   onPageChange: (page: Record<string, number>) => void;
 }
