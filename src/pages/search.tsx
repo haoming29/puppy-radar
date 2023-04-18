@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import { useRouter } from "next/router";
 import Navigation from "@/components/module/Navigation/Navigation";
 import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
@@ -52,6 +52,9 @@ const Search = () => {
     }),
     shallow
   );
+  const multi_select_id = useId();
+  const range_selector_id = useId();
+
   const [selected, setSelected] = useState<string[]>([]);
   const [displayRange, setDisplayRange] = useState(AGE_RANGE);
   const [ascendingSort, setAscendingSort] = useState(true);
@@ -155,7 +158,9 @@ const Search = () => {
             alignItems={"center"}
           >
             <Flex alignItems={"center"} className={styles.inputItem}>
-              <Text mr={2}>Breeds</Text>
+              <label id={multi_select_id} className={styles.searchLabel}>
+                Breeds
+              </label>
               <MultiSelect
                 className={styles.multiSelectBox}
                 options={breedOptions}
@@ -174,7 +179,7 @@ const Search = () => {
                     },
                   });
                 }}
-                labelledBy="Select"
+                labelledBy={multi_select_id}
               />
             </Flex>
             <Flex
@@ -229,8 +234,19 @@ const Search = () => {
               w={"250px"}
               className={styles.inputItem}
             >
-              <Text mr={4}>Age</Text>
+              <label
+                id={range_selector_id}
+                className={(styles.searchLabel, styles.rangeSelectorLabel)}
+              >
+                Age
+              </label>
               <RangeSlider
+                // eslint-disable-next-line jsx-a11y/aria-proptypes
+                aria-labelledby={[range_selector_id]}
+                // eslint-disable-next-line jsx-a11y/aria-proptypes
+                aria-valuetext={[
+                  `Dogs age is between ${displayRange[0]} years old and ${displayRange[0]} years old`,
+                ]}
                 defaultValue={AGE_RANGE}
                 value={displayRange}
                 min={AGE_RANGE[0]}

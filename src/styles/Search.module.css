@@ -28,3 +28,11 @@
   color: #300d38;
   cursor: auto;
 }
+
+.searchLabel {
+  margin-right: 0.5rem;
+}
+
+.rangeSelectorLabel {
+  margin-right: 1.5rem;
+}

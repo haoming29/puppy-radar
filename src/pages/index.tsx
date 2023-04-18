@@ -1,6 +1,14 @@
 import { useEffect } from "react";
 import Head from "next/head";
-import { Box, Button, Image, Input, SimpleGrid } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Image,
+  Input,
+  SimpleGrid,
+  FormControl,
+  FormLabel,
+} from "@chakra-ui/react";
 import { Controller, useForm } from "react-hook-form";
 import { Flex, Heading, Text } from "@chakra-ui/layout";
 import { ErrorMessage } from "@hookform/error-message";
@@ -129,12 +137,14 @@ const Home = () => {
                     },
                   }}
                   render={({ field }) => (
-                    <Input
-                      variant={"filled"}
-                      placeholder="First Name"
-                      isInvalid={!!errors?.firstName}
-                      {...field}
-                    />
+                    <FormControl>
+                      <FormLabel>First Name</FormLabel>
+                      <Input
+                        variant={"filled"}
+                        isInvalid={!!errors?.firstName}
+                        {...field}
+                      />
+                    </FormControl>
                   )}
                 />
 
@@ -153,16 +163,18 @@ const Home = () => {
                     },
                   }}
                   render={({ field }) => (
-                    <Input
-                      variant={"filled"}
-                      placeholder="Last Name"
-                      isInvalid={!!errors?.lastName}
-                      {...field}
-                    />
+                    <FormControl>
+                      <FormLabel>Last Name</FormLabel>
+                      <Input
+                        variant={"filled"}
+                        isInvalid={!!errors?.lastName}
+                        {...field}
+                      />
+                    </FormControl>
                   )}
                 />
               </SimpleGrid>
-              <Flex>
+              <Flex alignItems={"flex-end"}>
                 <Controller
                   name="email"
                   control={control}
@@ -177,14 +189,16 @@ const Home = () => {
                     },
                   }}
                   render={({ field }) => (
-                    <Input
-                      variant={"filled"}
-                      placeholder="Email"
-                      type="email"
-                      mr={2}
-                      isInvalid={!!errors?.email}
-                      {...field}
-                    />
+                    <FormControl>
+                      <FormLabel>Email</FormLabel>
+                      <Input
+                        variant={"filled"}
+                        type="email"
+                        mr={2}
+                        isInvalid={!!errors?.email}
+                        {...field}
+                      />
+                    </FormControl>
                   )}
                 />
                 <Button
