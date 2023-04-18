@@ -79,6 +79,8 @@ const Search = () => {
     if (page !== undefined) {
       setPageNumber(Number(page) - 1);
       from = DEFAULT_PAGE_SIZE * (Number(page) - 1);
+    } else {
+      setPageNumber(0);
     }
 
     const sortQuery = sort ? `breed:${sort}` : "";
