@@ -29,7 +29,7 @@ const Navigation = () => {
         <Link as={NextLink} href="/">
           <Image
             src="/puppy-radar-logo.svg"
-            alt="logo"
+            alt="website logo"
             height={"56px"}
             objectFit="cover"
           />
@@ -55,6 +55,7 @@ const Navigation = () => {
               w={"26px"}
               cursor={"pointer"}
               onClick={() => router.push("/match")}
+              title="Dogs You Liked"
             >
               <FontAwesomeIcon icon={faHeart} />
             </Box>

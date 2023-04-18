@@ -1,7 +1,7 @@
 import * as React from "react";
 import Pagination from "./Pagination";
 
-import { getByText, render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 describe("Pagination", () => {
@@ -15,11 +15,11 @@ describe("Pagination", () => {
     expect(pagination).toMatchSnapshot();
   });
 
-  it("shows the correct current page number and total page number", () => {
-    const { container } = render(
+  it("shows the correct total page number", () => {
+    const { getByText } = render(
       <Pagination pageCount={PAGE_COUNT} onPageChange={() => {}} />
     );
 
-    expect(getByText(container, PAGE_COUNT)).toBeInTheDocument();
+    expect(getByText(PAGE_COUNT)).toBeInTheDocument();
   });
 });
